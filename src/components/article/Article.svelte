@@ -15,145 +15,101 @@
 
 <div id="description">
 	<div class="article-section">
-		<h1>What is a Transformer?</h1>
+		<h1>Transformer とは何か?</h1>
 
 		<p>
-			Transformer is a neural network architecture that has fundamentally changed the approach to
-			Artificial Intelligence. Transformer was first introduced in the seminal paper
+			Transformer は、人工知能へのアプローチを根本的に変えてきたニューラル・ネットワーク・アーキテクチャです。Transformer は、2017 年に独創的な論文
 			<a
 				href="https://dl.acm.org/doi/10.5555/3295222.3295349"
 				title="ACM Digital Library"
 				target="_blank">"Attention is All You Need"</a
 			>
-			in 2017 and has since become the go-to architecture for deep learning models, powering text-generative
-			models like OpenAI's <strong>GPT</strong>, Meta's <strong>Llama</strong>, and Google's
-			<strong>Gemini</strong>. Beyond text, Transformer is also applied in
+			で初めて紹介され、それ以来、ディープラーニング・モデルの定番アーキテクチャとなり、OpenAI の <strong>GPT</strong>、Meta の <strong>Llama</strong>、Google の <strong>Gemini</strong> などのテキスト生成モデルに採用されています。Transformer は、テキスト以外にも、
 			<a
 				href="https://huggingface.co/learn/audio-course/en/chapter3/introduction"
 				title="Hugging Face"
-				target="_blank">audio generation</a
+				target="_blank">オーディオ生成</a
 			>,
 			<a
 				href="https://huggingface.co/learn/computer-vision-course/unit3/vision-transformers/vision-transformers-for-image-classification"
 				title="Hugging Face"
-				target="_blank">image recognition</a
+				target="_blank">画像認識</a
 			>,
 			<a href="https://elifesciences.org/articles/82819" title="eLife"
-				>protein structure prediction</a
-			>, and even
+				>タンパク質構造予測</a
+			>、さらには
 			<a
 				href="https://www.deeplearning.ai/the-batch/reinforcement-learning-plus-transformers-equals-efficiency/"
 				title="Deep Learning AI"
-				target="_blank">game playing</a
-			>, demonstrating its versatility across numerous domains.
+				target="_blank">ゲームプレイ</a
+			>, にも応用されており、さまざまな分野でその汎用性が実証されています。
 		</p>
 		<p>
-			Fundamentally, text-generative Transformer models operate on the principle of <strong
-				>next-word prediction</strong
-			>: given a text prompt from the user, what is the <em>most probable next word</em> that will follow
-			this input? The core innovation and power of Transformers lie in their use of self-attention mechanism,
-			which allows them to process entire sequences and capture long-range dependencies more effectively
-			than previous architectures.
+			基本的に、テキスト生成 Transformer モデルは、<strong>次の単語の予測</strong>の原理に基づいて動作します。つまり、ユーザーからのテキスト プロンプトが与えられた場合、この入力に続く<em>可能性が最も高い次の単語</em>は何でしょうか。Transformer の核となる革新性とパワーは、自己注意メカニズムの使用にあります。これにより、シーケンス全体を処理し、以前のアーキテクチャよりも効果的に長距離の依存関係をキャプチャできます。
 		</p>
 		<p>
-			GPT-2 family of models are prominent examples of text-generative Transformers. Transformer
-			Explainer is powered by the
+			GPT-2 ファミリーのモデルは、テキスト生成トランスフォーマーの代表的な例です。Transformer Explainer は、1 億 2,400 万のパラメータを持つ
 			<a href="https://huggingface.co/openai-community/gpt2" title="Hugging Face" target="_blank"
 				>GPT-2</a
 			>
-			(small) model which has 124 million parameters. While it is not the latest or most powerful Transformer
-			model, it shares many of the same architectural components and principles found in the current
-			state-of-the-art models making it an ideal starting point for understanding the basics.
+			(小) モデルを採用しています。最新または最も強力なトランスフォーマー モデルではありませんが、現在の最先端のモデルと同じアーキテクチャ コンポーネントと原則を多く共有しているため、基礎を理解するための理想的な出発点となります。
 		</p>
 	</div>
 
 	<div class="article-section">
-		<h1>Transformer Architecture</h1>
+		<h1>Transformer アーキテクチャ</h1>
 
 		<p>
-			Every text-generative Transformer consists of these <strong>three key components</strong>:
+			すべてのテキスト生成トランスフォーマーは、次の <strong>3 つの主要コンポーネント</strong> で構成されています:
 		</p>
 		<ol>
 			<li>
-				<strong class="bold-purple">Embedding</strong>: Text input is divided into smaller units
-				called tokens, which can be words or subwords. These tokens are converted into numerical
-				vectors called embeddings, which capture the semantic meaning of words.
+				<strong class="bold-purple">埋め込み</strong>: テキスト入力は、単語またはサブワードであるトークンと呼ばれる小さな単位に分割されます。これらのトークンは、単語の意味を捉える埋め込みと呼ばれる数値ベクトルに変換されます。
 			</li>
 			<li>
-				<strong class="bold-purple">Transformer Block</strong> is the fundamental building block of
-				the model that processes and transforms the input data. Each block includes:
+				<strong class="bold-purple">Transformer ブロック</strong> は、入力データを処理および変換するモデルの基本的な構成要素です。各ブロックには次のものが含まれます:
 				<ul class="">
 					<li>
-						<strong>Attention Mechanism</strong>, the core component of the Transformer block. It
-						allows tokens to communicate with other tokens, capturing contextual information and
-						relationships between words.
+						<strong>アテンション メカニズム</strong>は、Transformer ブロックのコア コンポーネントです。これにより、トークンが他のトークンと通信して、コンテキスト情報や単語間の関係をキャプチャできます。
 					</li>
 					<li>
-						<strong>MLP (Multilayer Perceptron) Layer</strong>, a feed-forward network that operates
-						on each token independently. While the goal of the attention layer is to route
-						information between tokens, the goal of the MLP is to refine each token's
-						representation.
+						<strong>MLP (多層パーセプトロン) レイヤー</strong>は、各トークンを独立して操作するフィードフォワード ネットワークです。アテンション レイヤーの目的はトークン間で情報をルーティングすることですが、MLP の目的は各トークンの表現を洗練することです。
 					</li>
 				</ul>
 			</li>
 			<li>
-				<strong class="bold-purple">Output Probabilities</strong>: The final linear and softmax
-				layers transform the processed embeddings into probabilities, enabling the model to make
-				predictions about the next token in a sequence.
+				<strong class="bold-purple">出力確率</strong>: 最後の線形レイヤーとソフトマックス レイヤーは、処理された埋め込みを確率に変換し、モデルがシーケンス内の次のトークンについて予測できるようにします。
 			</li>
 		</ol>
 
 		<div class="architecture-section">
 			<h2>Embedding</h2>
 			<p>
-				Let's say you want to generate text using a Transformer model. You add the prompt like this
-				one: <code>“Data visualization empowers users to”</code>. This input needs to be converted
-				into a format that the model can understand and process. That is where embedding comes in:
-				it transforms the text into a numerical representation that the model can work with. To
-				convert a prompt into embedding, we need to 1) tokenize the input, 2) obtain token
-				embeddings, 3) add positional information, and finally 4) add up token and position
-				encodings to get the final embedding. Let’s see how each of these steps is done.
+				Transformer モデルを使用してテキストを生成するとします。次のようなプロンプトを追加します: <code>“Data visualization empowers users to”（「データの視覚化により、ユーザーは）	</code> この入力は、モデルが理解して処理できる形式に変換する必要があります。ここで埋め込みが役立ちます。埋め込みは、テキストをモデルが処理できる数値表現に変換します。プロンプトを埋め込みに変換するには、1) 入力をトークン化し、2) トークン埋め込みを取得し、3) 位置情報を追加し、最後に 4) トークンと位置のエンコーディングを追加して、最終的な埋め込みを取得する必要があります。これらの各ステップがどのように実行されるかを見てみましょう。
+
 			</p>
 			<div class="figure">
 				<img src="./article_assets/embedding.png" width="60%" height="60%" align="middle" />
 			</div>
 			<div class="figure-caption">
-				Figure <span class="attention">1</span>. Expanding the Embedding layer view, showing how the
-				input prompt is converted to a vector representation. The process involves
-				<span class="fig-numbering">(1)</span> Tokenization, (2) Token Embedding, (3) Positional Encoding,
-				and (4) Final Embedding.
+				図 <span class="attention">1</span>. 埋め込みレイヤービューを展開し、入力プロンプトがベクトル表現に変換される様子を示します。プロセスには、<span class="fig-numbering">(1)</span> トークン化、(2) トークン埋め込み、(3) 位置エンコーディング、(4) 最終埋め込みが含まれます。
 			</div>
 			<div class="article-subsection">
-				<h3>Step 1: Tokenization</h3>
+				<h3>Step 1: トークン化</h3>
 				<p>
-					Tokenization is the process of breaking down the input text into smaller, more manageable
-					pieces called tokens. These tokens can be a word or a subword. The words <code
-						>"Data"</code
-					>
-					and <code>"vizualization"</code> correspond to unique tokens, while the word
-					<code>"empowers"</code>
-					is split into two tokens. The full vocabulary of tokens is decided before training the model:
-					GPT-2's vocabulary has <code>50,257</code> unique tokens. Now that we split our input text
-					into tokens with distinct IDs, we can obtain their vector representation from embeddings.
+					トークン化とは、入力テキストをトークンと呼ばれるより小さく扱いやすい部分に分割するプロセスです。これらのトークンは、単語またはサブワードです。単語 <code>"Data"</code> と <code>"vizualization"</code> は一意のトークンに対応し、単語 <code>"empowers"</code> は 2つのトークンに分割されます。トークンの完全な語彙は、モデルをトレーニングする前に決定されます。GPT-2 の語彙には、<code>50,257</code> 個の一意のトークンがあります。入力テキストを異なる ID を持つトークンに分割したので、埋め込みからそれらのベクトル表現を取得できます。
 				</p>
 			</div>
 			<div class="article-subsection">
-				<h3>Step 2. Token Embedding</h3>
+				<h3>Step 2. トークン埋め込み</h3>
 				<p>
-					GPT-2 Small represents each token in the vocabulary as a 768-dimensional vector; the
-					dimension of the vector depends on the model. These embedding vectors are stored in a
-					matrix of shape <code>(50,257, 768)</code>, containing approximately 39 million
-					parameters! This extensive matrix allows the model to assign semantic meaning to each
-					token.
+					GPT-2 Small は、語彙内の各トークンを 768 次元のベクトルとして表します。ベクトルの次元はモデルによって異なります。これらの埋め込みベクトルは、約 3,900 万個のパラメータを含む、形状 <code>(50,257, 768)</code> のマトリックスに格納されます。この大規模なマトリックスにより、モデルは各トークンに意味を割り当てることができます。
 				</p>
 			</div>
 			<div class="article-subsection">
-				<h3>Step 3. Positional Encoding</h3>
+				<h3>Step 3. 位置のエンコーディング</h3>
 				<p>
-					The Embedding layer also encodes information about each token's position in the input
-					prompt. Different models use various methods for positional encoding. GPT-2 trains its own
-					positional encoding matrix from scratch, integrating it directly into the training
-					process.
+					埋め込みレイヤーは、入力プロンプト内の各トークンの位置に関する情報もエンコードします。モデルによって位置エンコードの方法は異なります。GPT-2 は独自の位置エンコード マトリックスを最初からトレーニングし、それをトレーニング プロセスに直接統合します。
 				</p>
 
 				<!-- <div class="article-subsection-l2">
@@ -199,122 +155,96 @@
           </div> -->
 			</div>
 			<div class="article-subsection">
-				<h3>Step 4. Final Embedding</h3>
+				<h3>Step 4. 最後の埋め込み</h3>
 				<p>
-					Finally, we sum the token and positional encodings to get the final embedding
-					representation. This combined representation captures both the semantic meaning of the
-					tokens and their position in the input sequence.
+					最後に、トークンと位置エンコーディングを合計して、最終的な埋め込み表現を取得します。この組み合わせた表現は、トークンの意味と入力シーケンス内の位置の両方をキャプチャします。
 				</p>
 			</div>
 		</div>
 
 		<div class="architecture-section">
-			<h2>Transformer Block</h2>
+			<h2>Transformer ブロック</h2>
 
 			<p>
-				The core of the Transformer's processing lies in the Transformer block, which comprises
-				multi-head self-attention and a Multi-Layer Perceptron layer. Most models consist of
-				multiple such blocks that are stacked sequentially one after the other. The token
-				representations evolve through layers, from the first block to the 12th one, allowing the
-				model to build up an intricate understanding of each token. This layered approach leads to
-				higher-order representations of the input.
+				Transformer の処理の中核は、マルチヘッド セルフアテンションと多層パーセプトロン層で構成される Transformer ブロックにあります。
+
+				ほとんどのモデルは、複数のこのようなブロックが次々に積み重ねられて構成されています。
+				
+				トークン表現は、最初のブロックから 12 番目のブロックまで層を経て進化し、モデルが各トークンの複雑な理解を構築できるようにします。
+				
+				この階層化アプローチにより、入力の高次表現が実現します。
 			</p>
 
 			<div class="article-subsection">
-				<h3>Multi-Head Self-Attention</h3>
+				<h3>マルチ・ヘッド Self-Attention</h3>
 				<p>
-					The self-attention mechanism enables the model to focus on relevant parts of the input
-					sequence, allowing it to capture complex relationships and dependencies within the data.
-					Let’s look at how this self-attention is computed step-by-step.
+					Self-Attention メカニズムにより、モデルは入力シーケンスの関連部分に焦点を当てることができるため、データ内の複雑な関係や依存関係を捉えることができます。
+					この Self-Attention がどのように計算されるかを段階的に見ていきましょう。
 				</p>
 				<div class="article-subsection-l2">
-					<h4>Step 1: Query, Key, and Value Matrices</h4>
+					<h4>Step 1: クエリ、キー、値のマトリックス</h4>
 
 					<div class="figure">
 						<img src="./article_assets/QKV.png" width="80%" align="middle" />
 					</div>
 					<div class="figure-caption">
-						Figure <span class="attention">2</span>. Computing Query, Key, and Value matrices from
-						the original embedding.
+						図 <span class="attention">2</span>. 元の埋め込みからクエリ、キー、および値の行列を計算します。
 					</div>
 
 					<p>
-						Each token's embedding vector is transformed into three vectors:
-						<span class="q-color">Query (Q)</span>,
-						<span class="k-color">Key (K)</span>, and
-						<span class="v-color">Value (V)</span>. These vectors are derived by multiplying the
-						input embedding matrix with learned weight matrices for
-						<span class="q-color">Q</span>,
-						<span class="k-color">K</span>, and
-						<span class="v-color">V</span>. Here's a web search analogy to help us build some
-						intuition behind these matrices:
+						各トークンの埋め込みベクトルは、次の 3 つのベクトルに変換されます:
+						<span class="q-color">クエリ (Q)</span>、
+						<span class="k-color">キー (K)</span>、
+						<span class="v-color">値 (V)</span>。これらのベクトルは、入力埋め込み行列に、
+						<span class="q-color">Q</span>、
+						<span class="k-color">K</span>、
+						<span class="v-color">V</span> の学習済み重み行列を掛け合わせることで得られます。これらの行列の背後にある直感を理解するのに役立つ Web 検索の例えを以下に示します:
 					</p>
 					<ul>
 						<li>
-							<strong class="q-color font-medium">Query (Q)</strong> is the search text you type in
-							the search engine bar. This is the token you want to
-							<em>"find more information about"</em>.
+							<strong class="q-color font-medium">クエリ (Q)</strong> は、検索エンジン・バーに入力する検索テキストです。これは、<em>「詳細情報を検索」</em> したいトークンです。
 						</li>
 						<li>
-							<strong class="k-color font-medium">Key (K)</strong> is the title of each web page in the
-							search result window. It represents the possible tokens the query can attend to.
+							<strong class="k-color font-medium">キー (K)</strong> は、検索結果ウィンドウ内の各 Web ページのタイトルです。これは、クエリが対象とする可能性のあるトークンを表します。
 						</li>
 						<li>
-							<strong class="v-color font-medium">Value (V)</strong> is the actual content of web pages
-							shown. Once we matched the appropriate search term (Query) with the relevant results (Key),
-							we want to get the content (Value) of the most relevant pages.
+							<strong class="v-color font-medium">値 (V)</strong> は、表示される Web ページの実際のコンテンツです。適切な検索語 (クエリ) と関連する結果 (キー) を一致させたら、最も関連性の高いページのコンテンツ (値) を取得します。
 						</li>
 					</ul>
 					<p>
-						By using these QKV values, the model can calculate attention scores, which determine how
-						much focus each token should receive when generating predictions.
+						これらの QKV 値を使用することで、モデルは注目度スコアを計算し、予測を生成する際に各トークンにどの程度の焦点を当てるかを決定します。
 					</p>
 				</div>
 				<div class="article-subsection-l2">
-					<h4>Step 2: Masked Self-Attention</h4>
+					<h4>Step 2: マスクされた Self-Attention</h4>
 					<p>
-						Masked self-attention allows the model to generate sequences by focusing on relevant
-						parts of the input while preventing access to future tokens.
+						マスクされた Self-Attention により、モデルは入力の関連部分に焦点を当てながら、将来のトークンへのアクセスを防ぎ、シーケンスを生成できます。
 					</p>
 
 					<div class="figure">
 						<img src="./article_assets/attention.png" width="80%" align="middle" />
 					</div>
 					<div class="figure-caption">
-						Figure <span class="attention">3</span>. Using Query, Key, and Value matrices to
-						calculate masked self-attention.
+						図 <span class="attention">3</span>. クエリ、キー、および値のマトリックスを使用して、マスクされた Self-Attention を計算します。
 					</div>
 
 					<ul>
 						<li>
-							<strong>Attention Score</strong>: The dot product of
-							<span class="q-color">Query</span>
-							and <span class="k-color">Key</span> matrices determines the alignment of each query with
-							each key, producing a square matrix that reflects the relationship between all input tokens.
+							<strong>Attention スコア</strong>: <span class="q-color">クエリ</span> 行列と <span class="k-color">キー</span> 行列のドット積により、各クエリと各キーの配置が決定され、すべての入力トークン間の関係を反映する正方行列が生成されます。
+
 						</li>
 						<li>
-							<strong>Masking</strong>: A mask is applied to the upper triangle of the attention
-							matrix to prevent the model from accessing future tokens, setting these values to
-							negative infinity. The model needs to learn how to predict the next token without
-							“peeking” into the future.
+							<strong>マスキング</strong>: モデルが将来のトークンにアクセスできないように、Attention マトリックスの上部の三角形にマスクが適用され、これらの値が負の無限大に設定されます。モデルは、将来を「覗き見」することなく、次のトークンを予測する方法を学習する必要があります。
 						</li>
 						<li>
-							<strong>Softmax</strong>: After masking, the attention score is converted into
-							probability by the softmax operation which takes the exponent of each attention score.
-							Each row of the matrix sums up to one and indicates the relevance of every other token
-							to the left of it.
+							<strong>ソフトマックス</strong>: マスキング後、注目スコアは各注目スコアの指数を取るソフトマックス演算によって確率に変換されます。マトリックスの各行の合計は 1 になり、その左側にある他のすべてのトークンの関連性を示します。
 						</li>
 					</ul>
 				</div>
 				<div class="article-subsection-l2">
 					<h4>Step 3: Output</h4>
 					<p>
-						The model uses the masked self-attention scores and multiplies them with the
-						<span class="v-color">Value</span> matrix to get the
-						<span class="purple-color">final output</span>
-						of the self-attention mechanism. GPT-2 has <code>12</code> self-attention heads, each capturing
-						different relationships between tokens. The outputs of these heads are concatenated and passed
-						through a linear projection.
+						モデルはマスクされた Self-Attention スコアを使用し、それを <span class="v-color">Value</span> マトリックスと乗算して、 Self-Attention メカニズムの <span class="purple-color">最終出力</span> を取得します。GPT-2 には <code>12</code> 個の自己注意ヘッドがあり、それぞれがトークン間の異なる関係をキャプチャします。これらのヘッドの出力は連結され、線形投影に渡されます。
 					</p>
 				</div>
 
@@ -325,161 +255,145 @@
 						<img src="./article_assets/mlp.png" width="70%" align="middle" />
 					</div>
 					<div class="figure-caption">
-						Figure <span class="attention">4</span>. Using MLP layer to project the self-attention
-						representations into higher dimensions to enhance the model's representational capacity.
+						図 <span class="attention">4</span>. MLP レイヤーを使用して Self-Attention 表現を高次元に投影し、モデルの表現能力を強化します。
 					</div>
 
 					<p>
-						After the multiple heads of self-attention capture the diverse relationships between the
-						input tokens, the concatenated outputs are passed through the Multilayer Perceptron
-						(MLP) layer to enhance the model's representational capacity. The MLP block consists of
-						two linear transformations with a GELU activation function in between. The first linear
-						transformation increases the dimensionality of the input four-fold from <code>768</code>
-						to <code>3072</code>. The second linear transformation reduces the dimensionality back
-						to the original size of <code>768</code>, ensuring that the subsequent layers receive
-						inputs of consistent dimensions. Unlike the self-attention mechanism, the MLP processes
-						tokens independently and simply map them from one representation to another.
+						複数の自己注意ヘッドが入力トークン間の多様な関係を捕捉した後、連結された出力は多層パーセプトロン (MLP) 層に渡され、モデルの表現能力が強化されます。
+
+						MLP ブロックは、間に GELU アクティベーション関数を挟んだ 2 つの線形変換で構成されています。最初の線形変換では、入力の次元が <code>768</code> から <code>3072</code> へと4倍に増加します。
+						
+						2番目の線形変換では、次元が元のサイズである <code>768</code> に縮小され、後続の層が一貫した次元の入力を受け取ることが保証されます。
+						
+						Self-Attention メカニズムとは異なり、MLP はトークンを個別に処理し、1つの表現から別の表現に単純にマッピングします。
 					</p>
 				</div>
 
 				<div class="architecture-section">
-					<h2>Output Probabilities</h2>
+					<h2>確率の出力</h2>
 					<p>
-						After the input has been processed through all Transformer blocks, the output is passed
-						through the final linear layer to prepare it for token prediction. This layer projects
-						the final representations into a <code>50,257</code>
-						dimensional space, where every token in the vocabulary has a corresponding value called
-						<code>logit</code>. Any token can be the next word, so this process allows us to simply
-						rank these tokens by their likelihood of being that next word. We then apply the softmax
-						function to convert the logits into a probability distribution that sums to one. This
-						will allow us to sample the next token based on its likelihood.
+						入力がすべての Transformer ブロックで処理された後、出力は最後の線形レイヤーに渡され、トークン予測用に準備されます。
+
+						このレイヤーは、最終的な表現を <code>50,257</code> 次元空間に投影します。この空間では、語彙内のすべてのトークンに <code>logit</code> と呼ばれる対応する値があります。
+						
+						どのトークンも次の単語になる可能性があるため、このプロセスにより、これらのトークンを次の単語になる可能性で簡単にランク付けできます。
+						
+						次に、softmax 関数を適用して、logit を合計が 1 になる確率分布に変換します。
+						
+						これにより、次のトークンをその可能性に基づいてサンプリングできます。
 					</p>
 
 					<div class="figure">
 						<img src="./article_assets/softmax.png" width="60%" align="middle" />
 					</div>
 					<div class="figure-caption">
-						Figure <span class="attention">5</span>. Each token in the vocabulary is assigned a
-						probability based on the model's output logits. These probabilities determine the
-						likelihood of each token being the next word in the sequence.
+						図 <span class="attention">5</span>. 語彙内の各トークンには、モデルの出力ロジットに基づいて確率が割り当てられます。これらの確率により、各トークンがシーケンス内の次の単語になる可能性が決まります。
 					</div>
 
 					<p>
-						The final step is to generate the next token by sampling from this distribution The <code
-							>temperature</code
-						>
-						hyperparameter plays a critical role in this process. Mathematically speaking, it is a very
-						simple operation: model output logits are simply divided by the
-						<code>temperature</code>:
+						最後のステップは、この分布からサンプリングして次のトークンを生成することです。<code>temperature</code> ハイパーパラメータは、このプロセスで重要な役割を果たします。
+
+						数学的に言えば、これは非常に単純な操作です。モデル出力のロジットを <code>temperature</code> で単純に割るだけです:
 					</p>
 
 					<ul>
 						<li>
-							<code>temperature = 1</code>: Dividing logits by one has no effect on the softmax
-							outputs.
+							<code>temperature = 1</code>: ロジットを 1 で割っても、ソフトマックス出力には影響しません。
 						</li>
 						<li>
-							<code>temperature &lt; 1</code>: Lower temperature makes the model more confident and
-							deterministic by sharpening the probability distribution, leading to more predictable
-							outputs.
+							<code>temperature &lt; 1</code>: temperature が低いと、確率分布がシャープになり、モデルの信頼性と決定性が向上し、より予測可能な出力が得られます。
 						</li>
 						<li>
-							<code>temperature &gt; 1</code>: Higher temperature creates a softer probability
-							distribution, allowing for more randomness in the generated text – what some refer to
-							as model <em>“creativity”</em>.
+							<code>temperature &gt; 1</code>: temperature が高いと確率分布が柔らかくなり、生成されるテキストのランダム性が高まります。これは、モデルの<em>創造性</em>と呼ばれることもあります。
 						</li>
 					</ul>
 
 					<p>
-						Adjust the temperature and see how you can balance between deterministic and diverse
-						outputs!
+						temperature を調整して、確定的な出力と多様な出力のバランスをとる方法を確認してください。
 					</p>
 				</div>
 
 				<div class="architecture-section">
-					<h2>Advanced Architectural Features</h2>
+					<h2>高度なアーキテクチャ機能</h2>
 
 					<p>
-						There are several advanced architectural features that enhance the performance of
-						Transformer models. While important for the model's overall performance, they are not as
-						important for understanding the core concepts of the architecture. Layer Normalization,
-						Dropout, and Residual Connections are crucial components in Transformer models,
-						particularly during the training phase. Layer Normalization stabilizes training and
-						helps the model converge faster. Dropout prevents overfitting by randomly deactivating
-						neurons. Residual Connections allows gradients to flow directly through the network and
-						helps to prevent the vanishing gradient problem.
+						Transformer モデルのパフォーマンスを向上させる高度なアーキテクチャ機能がいくつかあります。
+
+						モデルの全体的なパフォーマンスには重要ですが、アーキテクチャのコア概念を理解する上ではそれほど重要ではありません。
+						
+						レイヤー正規化、ドロップアウト、および残差接続は、特にトレーニング フェーズで Transformer モデルの重要なコンポーネントです。
+						
+						レイヤー正規化はトレーニングを安定させ、モデルの収束を早めます。
+						
+						ドロップアウトは、ニューロンをランダムに非アクティブ化することでオーバーフィッティングを防止します。
+						
+						残差接続は、勾配がネットワークを直接流れるようにし、勾配消失の問題を防止するのに役立ちます。
 					</p>
 					<div class="article-subsection">
-						<h3>Layer Normalization</h3>
+						<h3>レイヤー正規化</h3>
 
 						<p>
-							Layer Normalization helps to stabilize the training process and improves convergence.
-							It works by normalizing the inputs across the features, ensuring that the mean and
-							variance of the activations are consistent. This normalization helps mitigate issues
-							related to internal covariate shift, allowing the model to learn more effectively and
-							reducing the sensitivity to the initial weights. Layer Normalization is applied twice
-							in each Transformer block, once before the self-attention mechanism and once before
-							the MLP layer.
+							レイヤー正規化は、トレーニング プロセスを安定させ、収束を改善するのに役立ちます。
+
+							これは、機能全体の入力を正規化することで機能し、アクティベーションの平均と分散が一貫していることを保証します。
+							
+							この正規化は、内部共変量シフトに関連する問題を軽減し、モデルがより効果的に学習できるようにし、初期重みに対する感度を低減するのに役立ちます。
+							
+							レイヤー正規化は、各 Transformer ブロックで 2 回適用されます。1 回は自己注意メカニズムの前、もう 1 回は MLP レイヤーの前です。
 						</p>
 					</div>
 					<div class="article-subsection">
-						<h3>Dropout</h3>
+						<h3>ドロップアウト</h3>
 
 						<p>
-							Dropout is a regularization technique used to prevent overfitting in neural networks
-							by randomly setting a fraction of model weights to zero during training. This
-							encourages the model to learn more robust features and reduces dependency on specific
-							neurons, helping the network generalize better to new, unseen data. During model
-							inference, dropout is deactivated. This essentially means that we are using an
-							ensemble of the trained subnetworks, which leads to a better model performance.
+							ドロップアウトは、トレーニング中にモデルの重みの一部をランダムにゼロに設定することで、ニューラル ネットワークの過剰適合を防ぐために使用される正規化手法です。
+
+							これにより、モデルはより堅牢な機能を学習し、特定のニューロンへの依存度が減り、ネットワークが新しい未知のデータに対してより適切に一般化できるようになります。
+							
+							モデル推論中は、ドロップアウトは無効になります。
+							
+							これは基本的に、トレーニング済みのサブネットワークのアンサンブルを使用していることを意味し、モデルのパフォーマンスが向上します。
 						</p>
 					</div>
 					<div class="article-subsection">
-						<h3>Residual Connections</h3>
+						<h3>残差接続</h3>
 
 						<p>
-							Residual connections were first introduced in the ResNet model in 2015. This
-							architectural innovation revolutionized deep learning by enabling the training of very
-							deep neural networks. Essentially, residual connections are shortcuts that bypass one
-							or more layers, adding the input of a layer to its output. This helps mitigate the
-							vanishing gradient problem, making it easier to train deep networks with multiple
-							Transformer blocks stacked on top of each other. In GPT-2, residual connections are
-							used twice within each Transformer block: once before the MLP and once after, ensuring
-							that gradients flow more easily, and earlier layers receive sufficient updates during
-							backpropagation.
+							残差接続は、2015 年に ResNet モデルで初めて導入されました。このアーキテクチャの革新により、非常に深いニューラル ネットワークのトレーニングが可能になり、ディープラーニングに革命が起こりました。
+
+							基本的に、残差接続は 1 つ以上のレイヤーをバイパスし、レイヤーの入力をその出力に追加するショートカットです。
+							
+							これにより、勾配消失の問題が緩和され、複数の Transformer ブロックが互いに積み重ねられたディープ ネットワークのトレーニングが容易になります。
+							
+							GPT-2 では、残差接続は各 Transformer ブロック内で 2 回使用されます。1 回は MLP の前、もう 1 回は後です。これにより、勾配がより簡単に流れるようになり、バックプロパゲーション中に前のレイヤーが十分な更新を受け取るようになります。
 						</p>
 					</div>
 				</div>
 
 				<div class="article-section">
-					<h1>Interactive Features</h1>
+					<h1>インタラクティブ機能</h1>
 					<p>
-						Transformer Explainer is built to be interactive and allows you to explore the inner
-						workings of the Transformer. Here are some of the interactive features you can play
-						with:
+						Transformer Explainer はインタラクティブに構築されており、Transformer の内部動作を探索できます。以下は、実際に使用できるインタラクティブ機能の一部です:
 					</p>
 
 					<ul>
 						<li>
-							<strong>Input your own text sequence</strong> to see how the model processes it and predicts
-							the next word. Explore attention weights, intermediate computations, and see how the final
-							output probabilities are calculated.
+							<strong>独自のテキスト・シーケンスを入力</strong>して、モデルがそれをどのように処理し、次の単語を予測するかを確認します。注意の重み、中間計算を調べ、最終的な出力確率がどのように計算されるかを確認します。
+
 						</li>
 						<li>
-							<strong>Use the temperature slider</strong> to control the randomness of the model’s predictions.
-							Explore how you can make the model output more deterministic or more creative by changing
-							the temperature value.
+							<strong>temperature スライダーを使用</strong>して、モデルの予測のランダム性を制御します。
+							temperature 値を変更することで、モデル出力をより決定論的に、またはより創造的にする方法を探ります。
+
 						</li>
 						<li>
-							<strong>Interact with attention maps</strong> to see how the model focuses on different
-							tokens in the input sequence. Hover over tokens to highlight their attention weights and
-							explore how the model captures context and relationships between words.
+							<strong>アテンション・マップを操作</strong>して、モデルが入力シーケンス内のさまざまなトークンにどのように焦点を当てているかを確認します。トークンの上にマウスを移動してアテンションの重みを強調表示し、モデルが単語間のコンテキストと関係をどのようにキャプチャするかを調べます。
 						</li>
 					</ul>
 				</div>
 
 				<div class="article-section">
-					<h2>Video Tutorial</h2>
+					<h2>ビデオ・チュートリアル</h2>
 					<div class="video-container">
 						<iframe
 							src="https://www.youtube.com/embed/ECR4oAwocjs"
@@ -492,29 +406,20 @@
 				</div>
 
 				<div class="article-section">
-					<h2>How is Transformer Explainer Implemented?</h2>
+					<h2>Transformer Explainer はどのように実装されますか?</h2>
 					<p>
-						Transformer Explainer features a live GPT-2 (small) model running directly in the
-						browser. This model is derived from the PyTorch implementation of GPT by Andrej
-						Karpathy's
-						<a href="https://github.com/karpathy/nanoGPT" title="Github" target="_blank"
-							>nanoGPT project</a
-						>
-						and has been converted to
-						<a href="https://onnxruntime.ai/" title="ONNX" target="_blank">ONNX Runtime</a>
-						for seamless in-browser execution. The interface is built using JavaScript, with
-						<a href="https://kit.svelte.dev/" title="Svelte" target="_blank">Svelte</a>
-						as a front-end framework and
-						<a href="http://D3.js" title="D3" target="_blank">D3.js</a>
-						for creating dynamic visualizations. Numerical values are updated live following the user
-						input.
+						Transformer Explainer には、ブラウザで直接実行されるライブ GPT-2 (small) モデルが搭載されています。
+
+						このモデルは、Andrej Karpathy の <a href="https://github.com/karpathy/nanoGPT" title="Github" target="_blank">nanoGPT プロジェクト</a> による GPT の PyTorch 実装から派生したもので、ブラウザ内でシームレスに実行できるように <a href="https://onnxruntime.ai/" title="ONNX" target="_blank">ONNX Runtime</a> に変換されています。
+
+						インターフェイスは JavaScript を使用して構築されており、フロントエンド フレームワークとして <a href="https://kit.svelte.dev/" title="Svelte" target="_blank">Svelte</a> が使用され、動的な視覚化を作成するために <a href="http://D3.js" title="D3" target="_blank">D3.js</a> が使用されています。数値は、ユーザー入力に従ってライブで更新されます。
 					</p>
 				</div>
 
 				<div class="article-section">
-					<h2>Who developed the Transformer Explainer?</h2>
+					<h2>Transformer Explainer を開発したのは誰ですか?</h2>
 					<p>
-						Transformer Explainer was created by
+						Transformer Explainer は以下のメンバーで開発されました。
 
 						<a href="https://aereeeee.github.io/" target="_blank">Aeree Cho</a>,
 						<a href="https://www.linkedin.com/in/chaeyeonggracekim/" target="_blank">Grace C. Kim</a
