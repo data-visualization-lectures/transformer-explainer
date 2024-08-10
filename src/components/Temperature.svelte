@@ -24,7 +24,7 @@
 			<div class="temperature-text flex items-center gap-[2px]">
 				<div>Temperature</div>
 				<HelpPopover id="temperature-help" placement="right">
-					{`Changes the output \nprobability distribution \nand randomness \nof next token.`}
+					{`次のトークンの\n出力確率分布と\nランダム性を\n変更します。`}
 				</HelpPopover>
 			</div>
 			<div class="temperature-value">
